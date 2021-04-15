@@ -1,32 +1,32 @@
-import styles from './Profile.module.css';
-import bg from '../../img/bg.jpg';
-import avatar from '../../img/avatar.png';
-import MyPosts from "./MyPosts/MyPosts";
+import styles from './MyPosts.module.css';
+import Post, {PostType} from "./Post/Post";
+import React from "react";
 
-const Profile = () => {
+
+let postData: PostType[] = [
+    {id: 1, post: 'Hi! How are you?'},
+    {id: 2, post: 'What about a movie tonight?'},
+    {id: 3, post: "It's cold today(("}
+]
+
+let postElements = postData.map((p) => {
+    return <Post post={p.post} id={p.id}/>
+})
+
+const MyPosts = () => {
     return (
-        <div>
-            <div className={styles.bg_img}>
-                <img src={bg} alt="bg"/>
-            </div>
-            <div className={styles.container}>
-                <div className={styles.user}>
-                    <div className={styles.avatar}>
-                        <img src={avatar} alt="avatar"/>
-                    </div>
-                    <div className={styles.info}>
-                        <div className={styles.name}> KATE MARTIENS</div>
-                        <div> Date of Birth: 21 May</div>
-                        <div> City: London</div>
-                        <div> Education: BSU’11</div>
-                        <div>Instagram: @kate_girl</div>
-                    </div>
+        <div className={styles.wrap}>
+            <div className={styles.item}>
+                <div className={styles.title}>My posts</div>
+                <div className={styles.form}>
+                    <textarea placeholder="your news..." name="text"> </textarea>
+                    <button className={styles.button} type="submit">Send</button>
                 </div>
-                <MyPosts />
             </div>
+            {postElements}
         </div>
     )
 }
 
 
-export default Profile;
+export default MyPosts;

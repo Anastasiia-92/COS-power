@@ -1,6 +1,6 @@
 
 
-const Dialogs = () =>{
+const Music = () =>{
     return(
         <div>
 
@@ -9,7 +9,7 @@ const Dialogs = () =>{
 
 }
 
-export default Dialogs
+export default Music
 
 
 
