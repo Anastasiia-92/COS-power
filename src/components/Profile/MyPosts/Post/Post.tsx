@@ -1,12 +1,13 @@
 import styles from './Post.module.css';
 import avatar from '../../../../img/avatar.png';
 
-export type PostType = {
+
+export type PostTypeProps = {
     id: number
-    post : string
+    post: string
 }
 
-const Post = (props: PostType) => {
+const Post = (props: PostTypeProps) => {
     return (
         <div className={styles.wrap}>
             <div className={styles.avatar}>

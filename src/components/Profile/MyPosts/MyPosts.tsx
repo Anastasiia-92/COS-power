@@ -1,19 +1,14 @@
 import styles from './MyPosts.module.css';
-import Post, {PostType} from "./Post/Post";
+import Post, {PostTypeProps} from "./Post/Post";
 import React from "react";
+import {PostsTypeProps} from "../Profile";
 
 
-let postData: PostType[] = [
-    {id: 1, post: 'Hi! How are you?'},
-    {id: 2, post: 'What about a movie tonight?'},
-    {id: 3, post: "It's cold today(("}
-]
+const MyPosts = (props: PostsTypeProps) => {
 
-let postElements = postData.map((p) => {
-    return <Post post={p.post} id={p.id}/>
-})
-
-const MyPosts = () => {
+    let postElements = props.posts.map((p: PostTypeProps) => {
+        return <Post post={p.post} id={p.id}/>
+    })
     return (
         <div className={styles.wrap}>
             <div className={styles.item}>
