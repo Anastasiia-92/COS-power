@@ -1,21 +1,32 @@
+.postWrap{
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+}
 .wrap{
     display: flex;
     margin-bottom: 30px;
 }
 .avatar{
     margin-right: 20px;
-    flex-basis: auto;
-
 }
+/*.avatar{*/
+/*    margin-right: 20px;*/
+/*    flex-basis: auto;*/
+/*}*/
 .avatar img{
     border-radius: 50%;
     max-width: 70px;
 }
 .post{
-    flex-grow: 1;
+    width: 560px;
     border: 2px solid #FFE0E0;
     border-radius: 5px;
     padding: 10px;
     font-size: 14px;
     color: #606162;
+}
+.likesCount{
+    display: block;
+    margin-left: auto;
 }

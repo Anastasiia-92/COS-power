@@ -1,10 +1,41 @@
+
+export type DialogDataType = {
+    id: number
+    name: string
+}
+export type MessagesDataType = {
+    id: number
+    message: string
+}
+export type DialogsDataType = {
+    dialogs: DialogDataType[]
+    messages: MessagesDataType[]
+}
+
+
+export type PostsDataType = {
+    id: number
+    post: string
+    likesCount: number
+}
+
+export type ProfilePageType = {
+    messageForNewPost: string
+    posts: PostsDataType[]
+}
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsDataType
+}
+
 export let state: RootStateType = {
-    profilePage:{
-    posts: [
-        {id: 1, post: 'Hi! How are you?'},
-        {id: 2, post: 'What about a movie tonight?'},
-        {id: 3, post: "It's cold today(("}
-    ],
+    profilePage: {
+        messageForNewPost: "",
+        posts: [
+            {id: 1, post: 'Hi! How are you?', likesCount: 3},
+            {id: 2, post: 'What about a movie tonight?', likesCount: 7},
+            {id: 3, post: "It's cold today((", likesCount: 2}
+        ],
     },
     dialogsPage: {
         dialogs: [
@@ -21,28 +52,25 @@ export let state: RootStateType = {
 }
 
 
-export type DialogDataType = {
-    id: number
-    name: string
-}
-export type MessagesDataType = {
-    id: number
-    message: string
-}
-export type DialogsDataType = {
-    dialogs: DialogDataType[]
-    messages: MessagesDataType[]
+export let onChange = () => {
+    console.log('hello')
 }
 
-export type PostsDataType = {
-    id: number
-    post: string
+export const subscribe = (callback: () => void) => {
+    onChange = callback
 }
 
-export type ProfilePageType = {
-    posts: PostsDataType[]
+export const addPost = (messagePost: string) => {
+    const newPost: PostsDataType = {
+        id: 5,
+        post: messagePost,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    onChange()
 }
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsDataType
+
+export const changeNewTextPost = (newText: string) => {
+    state.profilePage.messageForNewPost = newText;
+    onChange()
 }

@@ -12,24 +12,30 @@ import Dialogs from "./components/Dialogs/Dialogs";
 
 type AppPropsType = {
     state: RootStateType
+    addPost: (messagePost: string) => void
+    changeNewTextPost: (newText: string) => void
 }
 
 function App(props: AppPropsType) {
     return (
         <BrowserRouter>
-        <div className="App-wrapper">
-            <Header/>
-            <Navbar/>
+            <div className="App-wrapper">
+                <Header/>
+                <Navbar/>
                 <div className="App-wrapper-content">
-                    <Route path='/profile' render={ () => <Profile posts={props.state.profilePage.posts}/>} />
-                    <Route path='/dialogs' render={ () => <Dialogs dialog={props.state.dialogsPage.dialogs}
-                                                                   message={props.state.dialogsPage.messages}/>} />
+                    <Route path='/profile' render={() => <Profile
+                        state={props.state.profilePage}
+                        addPost={props.addPost}
+                        changeNewTextPost={props.changeNewTextPost}
+                    />}
+                    />
+                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
                 </div>
 
-        </div>
+            </div>
         </BrowserRouter>
     );
 }
