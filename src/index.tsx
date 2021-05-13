@@ -1,11 +1,11 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {subscribe} from './redux/state';
 import {rerenderEntireTree} from "./render";
+import {store} from "./redux/state";
 
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
 
 
 // If you want to start measuring performance in your app, pass a function

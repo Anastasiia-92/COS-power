@@ -1,13 +1,14 @@
 import styles from './MyPosts.module.css';
 import Post, {PostTypeProps} from "./Post/Post";
-import React, {ChangeEvent, ChangeEventHandler} from "react";
-import {PostsDataType} from "../../../redux/state";
+import React, {ChangeEvent} from "react";
+import {ActionsTypes, addPostAC, ChangeNewTextAC, PostsDataType} from "../../../redux/state";
 
 type MyPostsType = {
     posts: PostsDataType[]
-    addPost: (messagePost: string) => void
+    // addPost: (messagePost: string) => void
     newPost: string
-    changeNewTextPost:(newText: string) => void
+    // changeNewTextPost:(newText: string) => void
+    dispatch:(action: ActionsTypes) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
@@ -17,12 +18,15 @@ const MyPosts = (props: MyPostsType) => {
     })
 
     const addPostHandler = () => {
-            props.addPost(props.newPost);
-            props.changeNewTextPost('')
+            // props.addPost(props.newPost);
+            // props.changeNewTextPost('')
+        props.dispatch(addPostAC(props.newPost))
+        props.dispatch(ChangeNewTextAC(""))
         }
 
     let onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeNewTextPost(e.currentTarget.value)
+        props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value })
+        // props.changeNewTextPost(e.currentTarget.value)
     }
 
     return (
