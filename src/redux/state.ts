@@ -9,6 +9,7 @@ export type MessagesDataType = {
 export type DialogsDataType = {
     dialogs: DialogDataType[]
     messages: MessagesDataType[]
+    newMessageText: string
 }
 
 
@@ -37,7 +38,7 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof ChangeNewTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof ChangeNewTextAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof sendMessageAC>
 
 export const addPostAC = (messagePost: string) => {
     return {
@@ -52,6 +53,18 @@ export const ChangeNewTextAC = (newText: string) => {
         newText: newText
     } as const
 }
+export const addNewMessageTextAC = (body: string) => {
+    return {
+        type: "NEW-MESSAGE-TEXT",
+        body: body
+    } as const
+}
+export const sendMessageAC = () => {
+    return {
+        type: "SEND-MESSAGE",
+    } as const
+}
+
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -72,14 +85,17 @@ export const store: StoreType = {
             messages: [
                 {id: 1, message: "Hello! How do you feel about going to the movies today?"},
                 {id: 2, message: "Oh, great idea! I have not visited cinema for ages."}
-            ]
+            ],
+            newMessageText: ""
+
+
         }
     },
-    _onChange(){
+    _onChange() {
         console.log('state changed')
     },
 
-    subscribe(callback){
+    subscribe(callback) {
         this._onChange = callback
     },
     getState() {
@@ -100,7 +116,7 @@ export const store: StoreType = {
     //     this._onChange()
     // },
     dispatch(action) {
-        if(action.type === "ADD-POST"){
+        if (action.type === "ADD-POST") {
             const newPost: PostsDataType = {
                 id: 5,
                 post: action.messagePost,
@@ -108,18 +124,18 @@ export const store: StoreType = {
             }
             this._state.profilePage.posts.push(newPost)
             this._onChange()
-        } else if (action.type === "CHANGE-NEW-TEXT"){
+        } else if (action.type === "CHANGE-NEW-TEXT") {
             this._state.profilePage.messageForNewPost = action.newText;
             this._onChange()
+        } else if (action.type === "NEW-MESSAGE-TEXT") {
+            this._state.dialogsPage.newMessageText = action.body;
+            this._onChange()
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessageText;
+            this._state.dialogsPage.newMessageText = "";
+            this._state.dialogsPage.messages.push({id: 6, message: body},)
+            this._onChange()
         }
+
     }
-
 }
-
-
-
-
-
-
-
-
