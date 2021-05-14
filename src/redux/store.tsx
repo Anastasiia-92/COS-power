@@ -1,3 +1,6 @@
+import {addPostAC, ChangeNewTextAC, profileReducer} from "./profile-reducer";
+import {addNewMessageTextAC, dialogsReducer, sendMessageAC} from "./dialogs-reducer";
+
 export type DialogDataType = {
     id: number
     name: string
@@ -40,31 +43,6 @@ export type StoreType = {
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof ChangeNewTextAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof sendMessageAC>
 
-export const addPostAC = (messagePost: string) => {
-    return {
-        type: "ADD-POST",
-        messagePost: messagePost
-    } as const
-}
-
-export const ChangeNewTextAC = (newText: string) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    } as const
-}
-export const addNewMessageTextAC = (body: string) => {
-    return {
-        type: "NEW-MESSAGE-TEXT",
-        body: body
-    } as const
-}
-export const sendMessageAC = () => {
-    return {
-        type: "SEND-MESSAGE",
-    } as const
-}
-
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -87,8 +65,6 @@ export const store: StoreType = {
                 {id: 2, message: "Oh, great idea! I have not visited cinema for ages."}
             ],
             newMessageText: ""
-
-
         }
     },
     _onChange() {
@@ -101,41 +77,11 @@ export const store: StoreType = {
     getState() {
         return this._state
     },
-
-    // changeNewTextPost(newText: string){
-    //     this._state.profilePage.messageForNewPost = newText;
-    //     this._onChange()
-    // },
-    // addPost(messagePost: string){
-    //     const newPost: PostsDataType = {
-    //         id: 5,
-    //         post: messagePost,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._onChange()
-    // },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            const newPost: PostsDataType = {
-                id: 5,
-                post: action.messagePost,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._onChange()
-        } else if (action.type === "CHANGE-NEW-TEXT") {
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._onChange()
-        } else if (action.type === "NEW-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessageText = action.body;
-            this._onChange()
-        } else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogsPage.newMessageText;
-            this._state.dialogsPage.newMessageText = "";
-            this._state.dialogsPage.messages.push({id: 6, message: body},)
-            this._onChange()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._onChange()
 
     }
 }

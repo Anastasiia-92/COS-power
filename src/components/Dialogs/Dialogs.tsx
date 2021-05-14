@@ -4,12 +4,13 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {
     ActionsTypes,
-    addNewMessageTextAC,
+
     DialogDataType,
     DialogsDataType,
     MessagesDataType,
-    sendMessageAC
-} from "../../redux/state";
+
+} from "../../redux/store";
+import {addNewMessageTextAC, sendMessageAC} from "../../redux/dialogs-reducer";
 
 export type DialogsPropsType = {
     state: DialogsDataType
