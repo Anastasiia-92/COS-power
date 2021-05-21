@@ -2,7 +2,6 @@ import {ActionsTypes, DialogsDataType} from "./store";
 
 
 export const addNewMessageTextAC = (body: string) => {
-    debugger
     return {
         type: "NEW-MESSAGE-TEXT",
         body: body
@@ -14,7 +13,7 @@ export const sendMessageAC = () => {
     } as const
 }
 
-let initialState:DialogsDataType = {
+let initialState: DialogsDataType = {
     dialogs: [
         {id: 1, name: 'Bertha Jorkins'},
         {id: 2, name: 'Rubeus Hagrid'},
@@ -29,18 +28,18 @@ let initialState:DialogsDataType = {
 }
 
 export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
+
     switch (action.type) {
         case "NEW-MESSAGE-TEXT": {
-            let newState = {...state}
-            newState.newMessageText = action.body;
-            return newState;
+            return {...state, newMessageText: action.body};
         }
-        case "SEND-MESSAGE":{
-            let newState = {...state}
-            let body = newState.newMessageText;
-            newState.newMessageText = "";
-            newState.messages.push({id: 6, message: body},);
-            return newState;
+        case "SEND-MESSAGE": {
+            let body = state.newMessageText;
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, {id: 6, message: body}]
+            };
         }
         default:
             return state;

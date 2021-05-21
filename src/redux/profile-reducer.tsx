@@ -31,16 +31,17 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
                 post: action.messagePost,
                 likesCount: 0
             }
-            let newState = {...state}
-            newState.posts = [...state.posts]
-            newState.posts.push(newPost);
-            newState.messageForNewPost = '';
-            return newState;
+            return {
+                ...state,
+                posts: [newPost, ...state.posts],
+                messageForNewPost: ''
+            };
         }
         case "CHANGE-NEW-TEXT": {
-            let newState = {...state}
-            newState.messageForNewPost = action.newText;
-            return newState;
+            return {
+                ...state,
+                messageForNewPost: action.newText
+            };
         }
         default:
             return state;

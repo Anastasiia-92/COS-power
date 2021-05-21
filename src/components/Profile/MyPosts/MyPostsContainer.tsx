@@ -5,32 +5,6 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-
-// type MyPostsContainerPropsType = {
-//     store: ReduxStoreType
-// }
-// const MyPostsContainer = (props: MyPostsContainerPropsType) => {
-//     let state = props.store.getState();
-//
-//     const addPostHandler = (newPost: string) => {
-//         props.store.dispatch(addPostAC(newPost))
-//         props.store.dispatch(ChangeNewTextAC(""))
-//     }
-//
-//     let onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-//         props.store.dispatch(ChangeNewTextAC(e.currentTarget.value))
-//     }
-//
-//     return (
-//         <MyPosts changeNewTextPost={onPostChangeHandler}
-//                  addPostHandler={addPostHandler}
-//                  posts={state.profilePage.posts}
-//                  newPost={state.profilePage.messageForNewPost}
-//         />
-//     )
-//
-// }
-
 export type MapStateMyPostsPropsType = {
     posts: PostsDataType[]
     newPost: string
