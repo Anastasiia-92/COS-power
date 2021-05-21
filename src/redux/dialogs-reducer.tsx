@@ -1,6 +1,8 @@
-import {ActionsTypes, DialogsDataType, RootStateType} from "./store";
+import {ActionsTypes, DialogsDataType} from "./store";
+
 
 export const addNewMessageTextAC = (body: string) => {
+    debugger
     return {
         type: "NEW-MESSAGE-TEXT",
         body: body

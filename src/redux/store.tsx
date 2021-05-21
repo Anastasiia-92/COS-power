@@ -31,19 +31,21 @@ export type RootStateType = {
     dialogsPage: DialogsDataType
 }
 
-export type StoreType = {
+export type CustomStoreType = {
     _state: RootStateType
-    // changeNewTextPost: (newText: string) => void
-    // addPost: (newText: string) => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof ChangeNewTextAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof sendMessageAC>
+export type ActionsTypes = 
+    ReturnType<typeof addPostAC> |
+    ReturnType<typeof ChangeNewTextAC> |
+    ReturnType<typeof addNewMessageTextAC> |
+    ReturnType<typeof sendMessageAC>
 
-export const store: StoreType = {
+export const store: CustomStoreType = {
     _state: {
         profilePage: {
             messageForNewPost: "",
