@@ -30,14 +30,18 @@ let initialState:DialogsDataType = {
 
 export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case "NEW-MESSAGE-TEXT":
-            state.newMessageText = action.body;
-            return state;
-        case "SEND-MESSAGE":
-            let body = state.newMessageText;
-            state.newMessageText = "";
-            state.messages.push({id: 6, message: body},);
-            return state;
+        case "NEW-MESSAGE-TEXT": {
+            let newState = {...state}
+            newState.newMessageText = action.body;
+            return newState;
+        }
+        case "SEND-MESSAGE":{
+            let newState = {...state}
+            let body = newState.newMessageText;
+            newState.newMessageText = "";
+            newState.messages.push({id: 6, message: body},);
+            return newState;
+        }
         default:
             return state;
     }

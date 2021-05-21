@@ -1,15 +1,10 @@
 import styles from './MyPosts.module.css';
 import Post, {PostTypeProps} from "./Post/Post";
-import React, {ChangeEvent} from "react";
-import {PostsDataType} from "../../../redux/store";
+import React from "react";
+import {MapDispatchMyPostsPropsTyp, MapStateMyPostsPropsType} from "./MyPostsContainer";
 
 
-type MyPostsType = {
-    changeNewTextPost: (e:ChangeEvent<HTMLTextAreaElement> ) => void
-    addPostHandler:(newPost: string) => void
-    posts: PostsDataType[]
-    newPost: string
-}
+type MyPostsType = MapStateMyPostsPropsType & MapDispatchMyPostsPropsTyp
 
 const MyPosts = (props: MyPostsType) => {
 

@@ -1,10 +1,10 @@
 import React, {ChangeEvent, } from "react";
-import {addNewMessageTextAC, dialogsReducer, sendMessageAC} from "../../redux/dialogs-reducer";
+import {addNewMessageTextAC,sendMessageAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {CustomStoreType, DialogsDataType, RootStateType} from "../../redux/store";
+import {DialogsDataType, RootStateType} from "../../redux/store";
 import { Dispatch } from 'redux'
-import {ReduxStoreType} from "../../redux/redux-store";
+
 
 
 export type MapStateDialogsPropsType = {

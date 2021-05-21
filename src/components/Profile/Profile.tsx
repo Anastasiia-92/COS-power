@@ -5,16 +5,13 @@ import {CustomStoreType} from "../../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ReduxStoreType} from "../../redux/redux-store";
 
-export type PostsTypeProps = {
-    store: ReduxStoreType
-}
 
-const Profile = (props: PostsTypeProps) => {
+const Profile = () => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer  store={props.store}/>
+            <MyPostsContainer/>
         </div>
     )
 }
