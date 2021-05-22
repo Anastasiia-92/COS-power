@@ -2,8 +2,8 @@ import React, {ChangeEvent, } from "react";
 import {addNewMessageTextAC,sendMessageAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {DialogsDataType, RootStateType} from "../../redux/store";
 import { Dispatch } from 'redux'
+import {DialogsDataType, RootStateType} from "../../redux/redux-store";
 
 
 
@@ -22,12 +22,6 @@ let mapStateToProps = (state: RootStateType): MapStateDialogsPropsType => {
         dialogsPage: state.dialogsPage
     }
 }
-// let mapStateToProps = (state: CustomStoreType): MapStateDialogsPropsType => {
-//     debugger
-//     return {
-//         dialogsPage: state.getState().dialogsPage
-//     }
-// }
 
 let mapDispatchToProps = (dispatch: Dispatch) : MapDispatchDialogsPropsType => {
     return {

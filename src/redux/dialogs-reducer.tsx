@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsDataType} from "./store";
+import {ActionsTypes, DialogsDataType} from "./redux-store";
 
 
 export const addNewMessageTextAC = (body: string) => {

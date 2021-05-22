@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from "react";
-import {PostsDataType, RootStateType} from "../../../redux/store";
 import {addPostAC, ChangeNewTextAC} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {PostsDataType, RootStateType} from "../../../redux/redux-store";
 
 export type MapStateMyPostsPropsType = {
     posts: PostsDataType[]

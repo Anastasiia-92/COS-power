@@ -1,16 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import styles from './Dialogs.module.css';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import {DialogDataType, DialogsDataType, MessagesDataType} from "../../redux/store";
 import {MapDispatchDialogsPropsType, MapStateDialogsPropsType} from "./DialogsContainer";
+import {DialogDataType, MessagesDataType} from "../../redux/redux-store";
 
 
-// export type DialogsPropsType = {
-//     addNewMessageText: (body: ChangeEvent<HTMLTextAreaElement>) => void
-//     sendMessageClick: () => void
-//     dialogsPage: DialogsDataType
-// }
 export type DialogsPropsType = MapStateDialogsPropsType & MapDispatchDialogsPropsType
 
 

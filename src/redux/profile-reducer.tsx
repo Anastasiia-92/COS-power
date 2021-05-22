@@ -1,4 +1,5 @@
-import {ActionsTypes, PostsDataType, ProfilePageType} from "./store";
+import {ActionsTypes, PostsDataType, ProfilePageType} from "./redux-store";
+
 
 export const addPostAC = (messagePost: string) => {
     return {
