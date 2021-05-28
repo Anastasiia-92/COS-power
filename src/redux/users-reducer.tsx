@@ -80,6 +80,7 @@ export const userReducer = (state = initialState, action: ActionsTypes) => {
             return stateCopy;
         }
         case "SET-USERS": {
+
             return {...state, users: [...state.users, ...action.users]}
         }
         default:

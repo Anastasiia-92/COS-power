@@ -8,14 +8,12 @@ import {store} from './redux/redux-store';
 import {Provider} from "react-redux";
 
 // export let rerenderEntireTree = () => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
+);
 // }
 // rerenderEntireTree()
 //

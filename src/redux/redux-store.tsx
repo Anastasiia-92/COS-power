@@ -10,12 +10,20 @@ export type UserLocationType ={
 }
 
 export type UserStoreType = {
+    // id: number
+    // protoUrl: string
+    // followed: boolean
+    // name: string
+    // status: string
+    // location: UserLocationType
+    name: string
     id: number
-    protoUrl: string
-    followed: boolean
-    fullName: string
+    photos: {
+        small: string | null
+        large: string | null
+    }
     status: string
-    location: UserLocationType
+    followed: boolean
 }
 
 export type UsersStoreType = {
