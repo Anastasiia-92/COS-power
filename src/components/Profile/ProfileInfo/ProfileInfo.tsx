@@ -2,16 +2,30 @@ import styles from './ProfileInfo.module.css';
 import bg from "../../../img/bg.jpg";
 import avatar from "../../../img/avatar.png";
 import React from "react";
+import {ReduxStoreType, UserProfileType} from "../../../redux/redux-store";
+import Preloader from "../../common/Preloader/Preloader";
+import {useSelector} from "react-redux";
 
+type ProfileInfoPropsType = {
+    userProfile: UserProfileType | null
+}
+const ProfileInfo = (props: ProfileInfoPropsType) => {
+    const userProfile = useSelector<ReduxStoreType, UserProfileType | null>(state => state.profilePage.userProfile)
+    if(!userProfile) {
+        return <Preloader />
+    }
 
-const ProfileInfo = () => {
     return (
+
         <div>
+            <img src={bg} alt="bg"/>
             <div className={styles.bg_img}>
-                <img src={bg} alt="bg"/>
+
             </div>
             <div className={styles.container}>
+                <img src={props.userProfile?.photos.large}/>
                 <div className={styles.user}>
+
                     <div className={styles.avatar}>
                         <img src={avatar} alt="avatar"/>
                     </div>

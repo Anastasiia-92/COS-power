@@ -1,61 +1,50 @@
 
 import {ActionsTypes, UsersStoreType, UserStoreType} from "./redux-store";
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
         type: "FOLLOW",
         userId: userId
     } as const
 }
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: "UNFOLLOW",
         userId: userId
     } as const
 }
-export const setUsersAC = (users: Array<UserStoreType>) => {
+export const setUsers = (users: Array<UserStoreType>) => {
     return {
         type: "SET-USERS",
         users: users
     } as const
 }
+export const setCurrentPage = (currentPage: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        currentPage: currentPage
+    } as const
+}
+export const setTotalUsersCount = (totalUsersCount: number) => {
+    return {
+        type: "SET-TOTAL-USERS-COUNT",
+        count: totalUsersCount
+    } as const
+}
+export const toggleIsFetching = (isFetching: boolean) => {
+    return {
+        type: "TOGGLE-IS-FETCHING",
+        isFetching: isFetching
+    } as const
+}
 
 let initialState: UsersStoreType = {
-    users: [
-        // {
-        //     id: 1,
-        //     protoUrl: 'https://assets.teenvogue.com/photos/5d1cb84d1531210008bcf449/16:9/w_2560%2Cc_limit/00-promo-sailor-moon.jpg',
-        //     followed: false,
-        //     fullName: 'Rubeus Hagrid',
-        //     status: 'Like to cooking',
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
-        // {
-        //     id: 2,
-        //     protoUrl: 'https://assets.teenvogue.com/photos/5d1cb84d1531210008bcf449/16:9/w_2560%2Cc_limit/00-promo-sailor-moon.jpg',
-        //     followed: true,
-        //     fullName: 'Bertha Jorkins',
-        //     status: 'Just relax...',
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
-        // {
-        //     id: 3,
-        //     protoUrl: 'https://assets.teenvogue.com/photos/5d1cb84d1531210008bcf449/16:9/w_2560%2Cc_limit/00-promo-sailor-moon.jpg',
-        //     followed: true,
-        //     fullName: 'Bellatrix Lestrange',
-        //     status: "I'll teach you to mining",
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
-        // {
-        //     id: 4,
-        //     protoUrl: 'https://assets.teenvogue.com/photos/5d1cb84d1531210008bcf449/16:9/w_2560%2Cc_limit/00-promo-sailor-moon.jpg',
-        //     followed: false,
-        //     fullName: 'Luna Lovegood',
-        //     status: "Wish you good day!",
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
 
-    ]
 }
 
 export const userReducer = (state = initialState, action: ActionsTypes) => {
@@ -80,8 +69,16 @@ export const userReducer = (state = initialState, action: ActionsTypes) => {
             return stateCopy;
         }
         case "SET-USERS": {
-
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case "SET-CURRENT-PAGE": {
+            return {...state, currentPage: action.currentPage}
+        }
+        case "SET-TOTAL-USERS-COUNT": {
+            return {...state, totalUsersCount: action.count}
+        }
+        case "TOGGLE-IS-FETCHING": {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return state;

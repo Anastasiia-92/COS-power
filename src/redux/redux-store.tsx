@@ -1,21 +1,16 @@
 import { combineReducers, createStore } from 'redux'
 import {addNewMessageTextAC, dialogsReducer, sendMessageAC} from "./dialogs-reducer";
-import {followAC, setUsersAC, unfollowAC, userReducer} from "./users-reducer";
-import {addPostAC, ChangeNewTextAC, profileReducer} from "./profile-reducer";
+import {
+    follow,
+    setCurrentPage, setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow,
+    userReducer
+} from "./users-reducer";
+import {addPostAC, ChangeNewTextAC, profileReducer, setUserProfile} from "./profile-reducer";
 
-
-export type UserLocationType ={
-    city: string
-    country: string
-}
 
 export type UserStoreType = {
-    // id: number
-    // protoUrl: string
-    // followed: boolean
-    // name: string
-    // status: string
-    // location: UserLocationType
     name: string
     id: number
     photos: {
@@ -28,6 +23,10 @@ export type UserStoreType = {
 
 export type UsersStoreType = {
     users: Array<UserStoreType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 export type DialogDataType = {
@@ -51,31 +50,50 @@ export type PostsDataType = {
     likesCount: number
 }
 
+export type UserProfileType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string,
+        github: string,
+        instagram: string,
+        mainLink: null,
+        twitter: string,
+        vk: string,
+        website: null,
+        youtube: null
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: string,
+    photos: {
+        small: string,
+        large: string
+    }
+}
 export type ProfilePageType = {
     messageForNewPost: string
     posts: PostsDataType[]
+    userProfile: UserProfileType | null
 }
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsDataType
 }
 
-export type CustomStoreType = {
-    _state: RootStateType
-    _onChange: () => void
-    subscribe: (callback: () => void) => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsTypes) => void
-}
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof ChangeNewTextAC> |
     ReturnType<typeof addNewMessageTextAC> |
     ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC>
+    ReturnType<typeof follow> |
+    ReturnType<typeof unfollow> |
+    ReturnType<typeof setUsers>|
+    ReturnType<typeof setCurrentPage>|
+    ReturnType<typeof setTotalUsersCount>|
+    ReturnType<typeof toggleIsFetching>|
+    ReturnType<typeof setUserProfile>
 
 
 let reducers = combineReducers({
