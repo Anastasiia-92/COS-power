@@ -3,11 +3,12 @@ import {addNewMessageTextAC, dialogsReducer, sendMessageAC} from "./dialogs-redu
 import {
     follow,
     setCurrentPage, setTotalUsersCount,
-    setUsers, toggleIsFetching,
+    setUsers, toggleIsFetching, toggleIsFollowingProgress,
     unfollow,
     userReducer
 } from "./users-reducer";
 import {addPostAC, ChangeNewTextAC, profileReducer, setUserProfile} from "./profile-reducer";
+import {authReducer, setUserData} from "./auth-reducer";
 
 
 export type UserStoreType = {
@@ -19,6 +20,7 @@ export type UserStoreType = {
     }
     status: string
     followed: boolean
+
 }
 
 export type UsersStoreType = {
@@ -27,6 +29,7 @@ export type UsersStoreType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 export type DialogDataType = {
@@ -81,6 +84,12 @@ export type RootStateType = {
     dialogsPage: DialogsDataType
 }
 
+export type AuthStoreType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean,
+}
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
@@ -93,13 +102,16 @@ export type ActionsTypes =
     ReturnType<typeof setCurrentPage>|
     ReturnType<typeof setTotalUsersCount>|
     ReturnType<typeof toggleIsFetching>|
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile>|
+    ReturnType<typeof setUserData>|
+    ReturnType<typeof toggleIsFollowingProgress>
 
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    usersPage: userReducer
+    usersPage: userReducer,
+    auth: authReducer
 })
 
 
