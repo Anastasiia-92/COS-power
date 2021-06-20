@@ -3,8 +3,10 @@ import React from "react";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../redux/redux-store";
 
+
 type ProfilePropsType = {
     userProfile: UserProfileType | null
+
 }
 
 const Profile = (props: ProfilePropsType) => {

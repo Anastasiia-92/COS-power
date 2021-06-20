@@ -9,6 +9,8 @@ import {DialogsDataType, RootStateType} from "../../redux/redux-store";
 
 export type MapStateDialogsPropsType = {
     dialogsPage: DialogsDataType
+    isAuth: boolean
+
 }
 export type MapDispatchDialogsPropsType = {
     sendMessageClick: () => void
@@ -17,9 +19,9 @@ export type MapDispatchDialogsPropsType = {
 
 
 let mapStateToProps = (state: RootStateType): MapStateDialogsPropsType => {
-    debugger
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

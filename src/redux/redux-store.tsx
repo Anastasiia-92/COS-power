@@ -82,10 +82,6 @@ export type ProfilePageType = {
     posts: PostsDataType[]
     userProfile: UserProfileType | null
 }
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsDataType
-}
 
 export type AuthStoreType = {
     id: number | null,
@@ -93,7 +89,11 @@ export type AuthStoreType = {
     login: string | null,
     isAuth: boolean,
 }
-
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsDataType
+    auth: AuthStoreType
+}
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof ChangeNewTextAC> |

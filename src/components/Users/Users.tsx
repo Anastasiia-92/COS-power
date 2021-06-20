@@ -37,6 +37,7 @@ let Users = (props: UsersPropsType) => {
                     return <span
                         className={props.currentPage === p ? styles.selected : ""}
                         onClick={() => {
+                            debugger
                             props.pageChanged(p)
                         }}
                     >{p}</span>

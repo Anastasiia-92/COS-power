@@ -4,6 +4,7 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {MapDispatchDialogsPropsType, MapStateDialogsPropsType} from "./DialogsContainer";
 import {DialogDataType, MessagesDataType} from "../../redux/redux-store";
+import { Redirect } from "react-router-dom";
 
 
 export type DialogsPropsType = MapStateDialogsPropsType & MapDispatchDialogsPropsType
@@ -19,27 +20,29 @@ const Dialogs = (props: DialogsPropsType) => {
     })
     let newMessageText = props.dialogsPage.newMessageText
 
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.dialogs}>
-                {dialogElements}
-            </div>
-            <div className={styles.messages}>
-                <div>{messageElements}</div>
-                <div className={styles.textarea}>
+    if (!props.isAuth) return <Redirect to={"/login"} />
+
+        return (
+            <div className={styles.wrapper}>
+                <div className={styles.dialogs}>
+                    {dialogElements}
+                </div>
+                <div className={styles.messages}>
+                    <div>{messageElements}</div>
+                    <div className={styles.textarea}>
                     <textarea
                         placeholder={"Enter your message"}
                         onChange={props.addNewMessageText}
                         value={newMessageText}
                     ></textarea>
+                    </div>
+                    <div>
+                        <button onClick={props.sendMessageClick}>Send</button>
+                    </div>
                 </div>
-                <div>
-                    <button onClick={props.sendMessageClick}>Send</button>
-                </div>
-            </div>
 
-        </div>
-    )
+            </div>
+        )
 
 }
 
