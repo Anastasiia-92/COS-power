@@ -1,11 +1,10 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
+import {compose} from "redux";
 import {ReduxStoreType, UserProfileType} from "../../redux/redux-store";
-import {getUserProfile} from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter } from "react-router";
-import {Redirect} from "react-router-dom";
-
+import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {RouteComponentProps, withRouter} from "react-router";
 
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
@@ -17,39 +16,53 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsT
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount(): void {
         let userId = this.props.match.params.userId;
-        if(!userId) {
-            userId = "2"
+        if (!userId) {
+            userId = "17223"
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
+
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"} />
+
         return (
             <div>
                 <Profile
                     userProfile={this.props.userProfile}
+                    status={this.props.status}
+                    updateStatus={this.props.updateStatus}
                 />
             </div>
         );
     }
 }
+
+
 export type MapStatePropsType = {
     userProfile: UserProfileType | null,
-    isAuth: boolean
+    status: string
+
 }
 export type MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
+    getStatus: (userId: string) => void
+    updateStatus: (status: string) => void
+
 }
 
 let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
     return {
         userProfile: state.profilePage.userProfile,
-        isAuth: state.auth.isAuth
+        status: state.profilePage.status
     }
 }
 
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+// export default withAuthRedirectComponent(withRouter(connect(mapStateToProps, {getUserProfile} ) (ProfileContainer)));
 
-export default connect(mapStateToProps, {getUserProfile} ) (WithUrlDataContainerComponent);
+export default compose<ComponentType>(
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
+    withRouter,
+    // withAuthRedirectComponent
+)(ProfileContainer)

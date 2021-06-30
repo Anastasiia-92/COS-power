@@ -7,9 +7,10 @@ import {
     unfollow,
     userReducer
 } from "./users-reducer";
-import {addPostAC, ChangeNewTextAC, profileReducer, setUserProfile} from "./profile-reducer";
+import {addPostAC, ChangeNewTextAC, profileReducer, setStatus, setUserProfile} from "./profile-reducer";
 import {authReducer, setUserData} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
+import { reducer as formReducer } from 'redux-form'
 
 
 
@@ -81,6 +82,7 @@ export type ProfilePageType = {
     messageForNewPost: string
     posts: PostsDataType[]
     userProfile: UserProfileType | null
+    status: string
 }
 
 export type AuthStoreType = {
@@ -94,6 +96,7 @@ export type RootStateType = {
     dialogsPage: DialogsDataType
     auth: AuthStoreType
 }
+
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof ChangeNewTextAC> |
@@ -107,14 +110,16 @@ export type ActionsTypes =
     ReturnType<typeof toggleIsFetching>|
     ReturnType<typeof setUserProfile>|
     ReturnType<typeof setUserData>|
-    ReturnType<typeof toggleIsFollowingProgress>
+    ReturnType<typeof toggleIsFollowingProgress>|
+    ReturnType<typeof setStatus>
 
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: userReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 
@@ -122,3 +127,4 @@ let reducers = combineReducers({
 export let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export type ReduxStoreType = ReturnType<typeof reducers>;
+

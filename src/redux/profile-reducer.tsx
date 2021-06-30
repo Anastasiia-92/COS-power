@@ -1,7 +1,6 @@
 import {ActionsTypes, PostsDataType, ProfilePageType, UserProfileType} from "./redux-store";
 import {Dispatch} from "react";
-import {userAPI} from "../api/api";
-
+import {profileAPI, userAPI} from "../api/api";
 
 
 export const addPostAC = (messagePost: string) => {
@@ -22,6 +21,12 @@ export const setUserProfile = (profile: UserProfileType) => {
         profile: profile
     } as const
 }
+export const setStatus = (status: string) => {
+    return {
+        type: "SET-STATUS",
+        status: status
+    } as const
+}
 
 let initialState: ProfilePageType = {
     messageForNewPost: "",
@@ -30,7 +35,8 @@ let initialState: ProfilePageType = {
         {id: 2, post: 'What about a movie tonight?', likesCount: 7},
         {id: 3, post: "It's cold today((", likesCount: 2}
     ],
-    userProfile: null
+    userProfile: null,
+    status: ""
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
@@ -60,6 +66,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 userProfile: action.profile
             };
         }
+        case "SET-STATUS": {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state;
     }
@@ -71,6 +83,26 @@ export const getUserProfile = (userId: string) => {
         userAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data));
+            })
+    }
+}
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch<ActionsTypes>) => {
+
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status));
+                }
+            })
+    }
+}
+export const getStatus = (userId: string) => {
+    return (dispatch: Dispatch<ActionsTypes>) => {
+
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data));
             })
     }
 }

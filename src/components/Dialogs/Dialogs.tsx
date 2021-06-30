@@ -20,8 +20,6 @@ const Dialogs = (props: DialogsPropsType) => {
     })
     let newMessageText = props.dialogsPage.newMessageText
 
-    if (!props.isAuth) return <Redirect to={"/login"} />
-
         return (
             <div className={styles.wrapper}>
                 <div className={styles.dialogs}>

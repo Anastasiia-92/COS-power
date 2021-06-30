@@ -4,10 +4,14 @@ import avatar from "../../../img/avatar.png";
 import React from "react";
 import {UserProfileType} from "../../../redux/redux-store";
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
+
 
 
 type ProfileInfoPropsType = {
     userProfile: UserProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 const ProfileInfo = (props: ProfileInfoPropsType) => {
 
@@ -17,12 +21,16 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     return (
         <div>
-            <img src={bg} alt="bg"/>
-            <div className={styles.bg_img}>
+            {/*<img src={bg} alt="bg"/>*/}
+            {/*<div className={styles.bg_img}>*/}
 
-            </div>
+            {/*</div>*/}
             <div className={styles.container}>
-                <img src={props.userProfile?.photos.large}/>
+                <ProfileStatus
+                    status={props.status}
+                    updateStatus={props.updateStatus}
+                />
+                {/*<img src={props.userProfile?.photos.large}/>*/}
                 <div className={styles.user}>
 
                     <div className={styles.avatar}>
