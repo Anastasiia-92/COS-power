@@ -11,7 +11,7 @@
     font-weight: bold;
     margin-bottom: 12px;
 }
-textarea {
+.myPostsTextArea textarea {
     border: none;
     background-color: #F0EEF1;
     padding: 15px;

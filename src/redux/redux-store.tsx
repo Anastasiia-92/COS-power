@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore } from 'redux'
-import {addNewMessageTextAC, dialogsReducer, sendMessageAC} from "./dialogs-reducer";
+import {dialogsReducer, sendMessageAC} from "./dialogs-reducer";
 import {
     follow,
     setCurrentPage, setTotalUsersCount,
@@ -7,7 +7,7 @@ import {
     unfollow,
     userReducer
 } from "./users-reducer";
-import {addPostAC, ChangeNewTextAC, profileReducer, setStatus, setUserProfile} from "./profile-reducer";
+import {addPostAC, profileReducer, setStatus, setUserProfile} from "./profile-reducer";
 import {authReducer, setUserData} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
@@ -47,7 +47,6 @@ export type MessagesDataType = {
 export type DialogsDataType = {
     dialogs: DialogDataType[]
     messages: MessagesDataType[]
-    newMessageText: string
 }
 
 
@@ -79,7 +78,6 @@ export type UserProfileType = {
     }
 }
 export type ProfilePageType = {
-    messageForNewPost: string
     posts: PostsDataType[]
     userProfile: UserProfileType | null
     status: string
@@ -99,8 +97,8 @@ export type RootStateType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
-    ReturnType<typeof ChangeNewTextAC> |
-    ReturnType<typeof addNewMessageTextAC> |
+    // ReturnType<typeof ChangeNewTextAC> |
+    // ReturnType<typeof addNewMessageTextAC> |
     ReturnType<typeof sendMessageAC> |
     ReturnType<typeof follow> |
     ReturnType<typeof unfollow> |

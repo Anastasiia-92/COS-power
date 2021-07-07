@@ -9,12 +9,7 @@ export const addPostAC = (messagePost: string) => {
         messagePost: messagePost
     } as const
 }
-export const ChangeNewTextAC = (newText: string) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    } as const
-}
+
 export const setUserProfile = (profile: UserProfileType) => {
     return {
         type: "SET-USER-PROFILE",
@@ -29,7 +24,6 @@ export const setStatus = (status: string) => {
 }
 
 let initialState: ProfilePageType = {
-    messageForNewPost: "",
     posts: [
         {id: 1, post: 'Hi! How are you?', likesCount: 3},
         {id: 2, post: 'What about a movie tonight?', likesCount: 7},
@@ -43,6 +37,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
     switch (action.type) {
         case "ADD-POST": {
+            debugger
             const newPost: PostsDataType = {
                 id: 5,
                 post: action.messagePost,
@@ -51,13 +46,6 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {
                 ...state,
                 posts: [newPost, ...state.posts],
-                messageForNewPost: ''
-            };
-        }
-        case "CHANGE-NEW-TEXT": {
-            return {
-                ...state,
-                messageForNewPost: action.newText
             };
         }
         case "SET-USER-PROFILE": {

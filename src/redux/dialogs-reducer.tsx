@@ -1,15 +1,16 @@
 import {ActionsTypes, DialogsDataType} from "./redux-store";
 
 
-export const addNewMessageTextAC = (body: string) => {
-    return {
-        type: "NEW-MESSAGE-TEXT",
-        body: body
-    } as const
-}
-export const sendMessageAC = () => {
+// export const addNewMessageTextAC = (body: string) => {
+//     return {
+//         type: "NEW-MESSAGE-TEXT",
+//         body: body
+//     } as const
+// }
+export const sendMessageAC = (newMessageBody: string) => {
     return {
         type: "SEND-MESSAGE",
+        newMessageBody: newMessageBody
     } as const
 }
 
@@ -24,20 +25,19 @@ let initialState: DialogsDataType = {
         {id: 1, message: "Hello! How do you feel about going to the movies today?"},
         {id: 2, message: "Oh, great idea! I have not visited cinema for ages."}
     ],
-    newMessageText: ""
+
 }
 
 export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
 
     switch (action.type) {
-        case "NEW-MESSAGE-TEXT": {
-            return {...state, newMessageText: action.body};
-        }
+        // case "NEW-MESSAGE-TEXT": {
+        //     return {...state, newMessageText: action.body};
+        // }
         case "SEND-MESSAGE": {
-            let body = state.newMessageText;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageText: '',
                 messages: [...state.messages, {id: 6, message: body}]
             };
         }
